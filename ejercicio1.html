@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario</title>
+    <script defer src="./scripts.js"></script>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="boton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        let resultado = document.querySelector(".resultado");
+        let formulario = document.getElementById("formulario");
+        let nombre = document.getElementById("nombre");
+        let errorNombre = document.querySelector(".errorNombre");
+        let asunto = document.getElementById("asunto");
+        let errorAsunto = document.querySelector(".errorAsunto");
+        let mensaje = document.getElementById("mensaje");
+        let errorMensaje = document.querySelector(".errorMensaje");
+        let boton = document.getElementById("boton");
+
+        // definir patrones para ingreso de formulario
+
+        const patronForm = /^[a-z\sñáéíóúü'-]+$/i;
+
+
+
+        formulario.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let flagFormulario=true;
+
+            if (!patronForm.test(nombre.value)) {
+                errorNombre.innerText = "El nombre es requerido";
+                let flagFormulario=false;
+            } else {
+                errorNombre.innerText = "";
+            }
+
+            if (!patronForm.test(asunto.value)) {
+                errorAsunto.innerText = "El asunto es requerido";
+                let flagFormulario=false;
+            } else {
+                errorAsunto.innerText = "";
+
+            }
+            if (!patronForm.test(mensaje.value)) {
+                errorMensaje.innerText = "El Mensaje es requerido";
+                let flagFormulario=false;
+            } else {
+                errorMensaje.innerText = "";
+
+            }
+
+if(flagFormulario){
+    resultado.innerText = "Mensaje enviado con éxito!!";
+    formulario.reset();
+}
+
+        })
+
+
+    </script>
+</body>
+
+</html>
